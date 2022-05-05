@@ -17,7 +17,11 @@ Po přepojení na nastavené IVR menu řízené webem se ozve výzva k zadání 
 
 ## Jak to nastavím?
 
-V administraci vašeho Odorik účtu vytvořte nové IVR menu řízené webem. Jako URL zadejte buďto produkční adresu této aplikace: **(doplnit)** a nebo adresu na místo, kde aplikaci hostujete sami. Počet očekávaných DTMF znaků zvolte 0.
+V administraci vašeho Odorik účtu vytvořte nové IVR menu řízené webem. Jako URL zadejte buďto produkční adresu této aplikace: **https://odorikas.jakubharabis.cz** a nebo adresu na místo, kde aplikaci hostujete sami. Doplňte ji o GET parametry dle tabulky níže.
+
+![Ukázka konfigurace](https://i.imgur.com/prdwzsb.png)
+
+S paramtery nastavenými na obrázku tak bude po volajícím požadováno zadání 2 náhodných číslic, po úspěšném zadání se vykoná příkaz `dial:*082` a po neúspěšném zadání příkaz `hangup`. URL z obrázku: `https://odorikas.jakubharabis.cz?length=2&success=dial_*082&failure=hangup`.
 
 V URL se nachází 3 povinné GET parametry a 1 nepovinný.
 
@@ -36,6 +40,6 @@ Aplikaci je možno spustit na libovolném webovém hostingu podporujícím PHP. 
 
 ## Osobní údaje v mnou hostované aplikaci
 
-Jak bylo zmíněno výše, je možno využít aplikaci hostovanou mnou na adrese **(doplnit)**. Je zabezpečena tak, aby soubor _data.json_, který obsahuje informace o generovaném kódu nebyl veřejně přístupný.
+Jak bylo zmíněno výše, je možno využít aplikaci hostovanou mnou na adrese **https://odorikas.jakubharabis.cz**. Je zabezpečena tak, aby soubor _data.json_, který obsahuje informace o generovaném kódu nebyl veřejně přístupný.
 
 Soubor _data.json_ obsahuje dvě informace: [hashované](https://cs.wikipedia.org/wiki/Hašovací_funkce) ID hovoru a generovaný kód. Díky tomu, že je ID hovoru [hashované](https://cs.wikipedia.org/wiki/Hašovací_funkce) může aplikace rozpoznat, že se jedná o tentýž hovor, nicméně **není možno z uložených dat zjistit z jakého telefonního čísla hovor přichází**. Pokud navíc volající nezavěsí před přepojením na výzvu zadání číslic, **bude před vykonáním příkazu success jeho záznam odstraněn**.
